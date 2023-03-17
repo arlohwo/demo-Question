@@ -1,0 +1,11 @@
+<view style="display: flex;flex-direction: column;justify-content: center;align-items: center;padding: 20px;">
+  <block wx:for="{{list}}" wx:key="id" >
+    <textarea wx:if="{{index == Index}}" style="height: 200px;border: 1px solid;padding: 20px;border-radius: 30px;">
+      {{item.value}}
+    </textarea>
+  </block>
+  <view style="display: flex;flex-direction: row;margin-top: 20px;">
+    <button style="margin-right: 5px;margin-left: 5px;" type="primary" plain="true" bindtap="onBack">previous</button>
+    <button style="margin-left: 5px;margin-right: 5px;" type="warn" plain="true" bindtap="onNext">next</button>
+  </view>
+</view>
