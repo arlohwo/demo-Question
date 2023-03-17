@@ -41,29 +41,39 @@ Page({
         next:'',
         previous:''
       }
-    /*currentId:'',
-    currentText:'',
-    currentNext:'',
-    currentPrevious:''*/
   },
   onLoad:function(){
     this.setData({
       currentQ : this.data.qList[0]
     })
-    /*const q = this.data.qList[0]
-    var qq = {
-      id: q.id,
-      text: q.text,
-      next: q.next,
-      previous: q.previous
-    }*/
-    /*this.setData({
-      currentId : this.data.qList[0].id,
-      currentText : this.data.qList[0].text,
-      currentNext : this.data.qList[0].next,
-      currentPrevious : this.data.qList[0].previous
-    })*/
   },
+  onBack:function(){
+    if(this.data.currentQ.previous == ''){
+      wx.showToast({
+        title : '前面没有了'
+      })
+    }else{
+      var previousQ =  this.getQByID(this.data.currentQ.previous)
+      this.setData({
+        currentQ : previousQ
+      })
+    }
+  },
+  onNext:function(){
+    if (this.data.currentQ.next == ''){
+      wx.showToast({
+        title : '后面没有了！'
+      })
+    }else{
+      var nextQ = this.getQByID(this.data.currentQ.next)
+      this.setData({
+        currentQ : nextQ
+      })
+    }
+  },
+  getQByID:function(id : string){
+    return this.data.qList.find(Q => Q.id == id)
+  }
   /*onBack:function(){
     if(this.data.Index == 0){
       wx.showToast({
