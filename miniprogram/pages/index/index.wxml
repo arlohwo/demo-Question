@@ -1,7 +1,13 @@
-<view style="display: flex;flex-direction: column;justify-content: center;align-items: center;padding: 20px;">
-    <textarea style="height: 200px;border: 1px solid;padding: 20px;border-radius: 30px;">
-      {{currentQ.text}}
-    </textarea>
+<view style="display: flex;flex-direction: column;justify-content: center;align-items: center;">
+    <view wx:if="{{currentQ.type == 'intro'}}" style="border: 1px solid;padding: 10px;border-radius: 30px;">
+      {{currentQ.content.text}}
+    </view>
+    <view wx:else style="border: 1px solid;padding: 20px;border-radius: 30px;">
+      <view>
+        {{currentQ.content.text}}
+      </view>
+    </view>
+    <input placeholder="{{currentQ.content.hint}}"/>
   <view style="display: flex;flex-direction: row;margin-top: 20px;">
     <button style="margin-right: 5px;margin-left: 5px;" type="primary" plain="true" bindtap="onBack">previous</button>
     <button style="margin-left: 5px;margin-right: 5px;" type="warn" plain="true" bindtap="onNext">next</button>
