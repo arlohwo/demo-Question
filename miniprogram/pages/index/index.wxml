@@ -1,15 +1,41 @@
-<view style="display: flex;flex-direction: column;justify-content: center;align-items: center;">
-    <view wx:if="{{currentQ.type == 'intro'}}" style="border: 1px solid;padding: 10px;border-radius: 30px;">
+<view class="container">
+
+    <view class="textBox" wx:if="{{currentQ.type == 'intro'}}">
       {{currentQ.content.text}}
     </view>
-    <view wx:else style="border: 1px solid;padding: 20px;border-radius: 30px;">
-      <view>
+
+    <view wx:if="{{currentQ.type == 'input'}}">
+      <view class="textBox">
         {{currentQ.content.text}}
       </view>
+      <input class="inputBox" placeholder="{{currentQ.content.hint}}"/>
     </view>
-    <input placeholder="{{currentQ.content.hint}}"/>
-  <view style="display: flex;flex-direction: row;margin-top: 20px;">
-    <button style="margin-right: 5px;margin-left: 5px;" type="primary" plain="true" bindtap="onBack">previous</button>
-    <button style="margin-left: 5px;margin-right: 5px;" type="warn" plain="true" bindtap="onNext">next</button>
+
+    <view wx:if="{{currentQ.type == 'single_choice'}}">
+      <view class="textBox">
+        {{currentQ.content.text}}
+      </view>
+      <radio-group bindchange="radioChange">
+        <label wx:for="{{currentQ.content.choices}}" class="labelBox">
+          <radio>{{item}}</radio>
+        </label>
+      </radio-group>
+    </view>
+
+    <view wx:if="{{currentQ.type == 'multiple_choice'}}">
+      <view class="textBox">
+        {{currentQ.content.text}}
+      </view>
+      <checkbox-group bindchange="checkChange">
+        <label wx:for="{{currentQ.content.choices}}" class="labelBox">
+          <radio>{{item}}</radio>
+        </label>
+      </checkbox-group>
+      <input class="inputBox" placeholder="{{currentQ.content.hint}}"/>
+    </view>
+
+  <view class="btnBox">
+    <button class="previousBtn" hidden="{{currentQ.previous == ''}}" bindtap="onBack">上一题</button>
+    <button class="nextBtn" hidden="{{currentQ.next == ''}}" bindtap="onNext">下一题</button>
   </view>
 </view>
